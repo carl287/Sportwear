@@ -1,7 +1,7 @@
 package com.example.Sportwear.assemblers;
 
 import com.example.Sportwear.Controller.UserController;
-import com.example.Sportwear.Model.User; // Esta es la clase de dominio correcta
+import com.example.Sportwear.Model.User;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
