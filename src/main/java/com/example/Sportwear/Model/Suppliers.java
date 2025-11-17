@@ -1,5 +1,6 @@
 package com.example.Sportwear.Model;
 
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,16 +9,18 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-public class User {
 
+@Entity
+
+public class Suppliers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String username;
-    private String password;
-    private String email;
-    private boolean esAdmin;
 
-    private boolean active = true;
+    private int id;
+
+    @Column(name = "supplier_name")
+    private String supplier_name;
+
+    @Column(name = "supplier_email")
+    private String supplier_email;
 }
