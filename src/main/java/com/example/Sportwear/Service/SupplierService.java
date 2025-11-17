@@ -1,17 +1,17 @@
 package com.example.Sportwear.Service;
 
 import com.example.Sportwear.Model.Suppliers;
-import com.example.Sportwear.Repository.SuppliersRepository;
+import com.example.Sportwear.Repository.SupplierRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class SuppliersService {
+public class SupplierService {
 
-    private final SuppliersRepository repo;
+    private final SupplierRepository repo;
 
-    public SuppliersService(SuppliersRepository repo) {
+    public SupplierService(SupplierRepository repo) {
         this.repo = repo;
     }
 
@@ -41,4 +41,3 @@ public class SuppliersService {
         repo.deleteById(id);
     }
 }
-

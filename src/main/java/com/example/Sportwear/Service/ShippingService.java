@@ -30,3 +30,15 @@ public class ShippingService {
 
     public Shipping update(int id, Shipping updated) {
         Shipping existing = getById(id);
+
+        existing.setShipping_name(updated.getShipping_name());
+        existing.setShipping_email(updated.getShipping_email());
+        existing.setPatente(updated.getPatente());
+
+        return shippingRepository.save(existing);
+    }
+
+    public void delete(int id) {
+        shippingRepository.deleteById(id);
+    }
+}

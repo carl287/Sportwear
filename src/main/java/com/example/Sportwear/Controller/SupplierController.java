@@ -1,19 +1,19 @@
 package com.example.Sportwear.Controller;
 
 import com.example.Sportwear.Model.Suppliers;
-import com.example.Sportwear.Service.SuppliersService;
+import com.example.Sportwear.Service.SupplierService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/suppliers")
+@RequestMapping("/api/supplier")
 @CrossOrigin("*")
-public class SuppliersController {
+public class SupplierController {
 
-    private final SuppliersService service;
+    private final SupplierService service;
 
-    public SuppliersController(SuppliersService service) {
+    public SupplierController(SupplierService service) {
         this.service = service;
     }
 

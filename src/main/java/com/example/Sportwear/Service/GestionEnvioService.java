@@ -32,4 +32,16 @@ public class GestionEnvioService {
         GestionEnvio existing = getById(id);
 
         existing.setGestionName(updated.getGestionName());
-        existing.setGestionEmail(updated.getGe
+        existing.setGestionEmail(updated.getGestionEmail());
+        existing.setGestionPatente(updated.getGestionPatente());
+
+        return repo.save(existing);
+    }
+
+    public void delete(int id) {
+        if (!repo.existsById(id)) {
+            throw new RuntimeException("Gestión de envío no encontrada");
+        }
+        repo.deleteById(id);
+    }
+}
