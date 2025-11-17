@@ -19,27 +19,27 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Product getProductById(int id) {
+    public Product getById(int id) {
         return productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado con ID: " + id));
     }
 
-    public Product createProduct(Product product) {
+    public Product create(Product product) {
         return productRepository.save(product);
     }
 
-    public Product updateProduct(int id, Product updatedProduct) {
-        Product existing = getProductById(id);
+    public Product update(int id, Product updated) {
+        Product existing = getById(id);
 
-        existing.setName(updatedProduct.getName());
-        existing.setDescription(updatedProduct.getDescription());
-        existing.setPrice(updatedProduct.getPrice());
+        existing.setName(updated.getName());
+        existing.setDescription(updated.getDescription());
+        existing.setPrice(updated.getPrice());
 
         return productRepository.save(existing);
     }
 
-    public void deleteProduct(int id) {
-        Product existing = getProductById(id);
+    public void delete(int id) {
+        Product existing = getById(id);
         productRepository.delete(existing);
     }
 }
