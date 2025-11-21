@@ -1,7 +1,7 @@
 package com.example.Sportwear.assemblers;
 
 import com.example.Sportwear.Controller.GestionProductController;
-import com.example.Sportwear.Model.GestionProduct; // Asumido: El modelo de datos
+import com.example.Sportwear.Model.GestionProduct;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
