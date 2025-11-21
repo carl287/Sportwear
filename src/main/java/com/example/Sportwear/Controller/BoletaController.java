@@ -7,7 +7,6 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,7 +47,7 @@ public class BoletaController {
     })
     @GetMapping("/{id}")
     @Parameter(description = "ID de la boleta a buscar", example = "101")
-    public ResponseEntity<Boleta> getBoletaById(@PathVariable int id) {
+    public ResponseEntity<Boleta> getBoletaById(int id) {
         try {
             Boleta boleta = boletaService.getById(id);
             return new ResponseEntity<>(boleta, HttpStatus.OK);

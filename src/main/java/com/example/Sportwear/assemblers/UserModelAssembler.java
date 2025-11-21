@@ -14,6 +14,7 @@ public class UserModelAssembler implements RepresentationModelAssembler<User, En
     @Override
     public EntityModel<User> toModel(User user) {
         return EntityModel.of(user,
+                //hay que poner un metodo para eliminar, agregar o desactivar usuarios, validando que le usaurio sea administrador
                 linkTo(methodOn(UserController.class).getUserById(user.getId())).withSelfRel(),
                 linkTo(methodOn(UserController.class).getUsers()).withRel("users"));
     }

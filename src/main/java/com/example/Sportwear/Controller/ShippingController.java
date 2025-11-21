@@ -106,7 +106,7 @@ public class ShippingController {
     public ResponseEntity<HttpStatus> deleteShipping(@PathVariable int id) {
         try {
             shippingService.delete(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT); 
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
