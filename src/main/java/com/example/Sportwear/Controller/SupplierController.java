@@ -18,9 +18,10 @@ public class SupplierController {
     }
 
     @PostMapping
-    public Suppliers create(@RequestBody int suppliers) {
+    public Suppliers create(@RequestBody Suppliers suppliers) {
         return service.create(suppliers);
     }
+
 
     @GetMapping
     public List<Suppliers> getAll() {

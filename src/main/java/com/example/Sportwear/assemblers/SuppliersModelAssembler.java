@@ -19,7 +19,8 @@ public class SuppliersModelAssembler implements RepresentationModelAssembler<Sup
         return EntityModel.of(supplier,
                 linkTo(methodOn(SupplierController.class).getById(supplier.getId())).withSelfRel(),
                 linkTo(methodOn(SupplierController.class).getAll()).withRel("suppliers"),
-                linkTo(methodOn(SupplierController.class).create(placeholder.getId())).withRel("create"),
+                linkTo(methodOn(SupplierController.class).create(placeholder)).withRel("create"),
+
                 linkTo(methodOn(SupplierController.class).update(supplier.getId(), placeholder)).withRel("update"),
                 linkTo(methodOn(SupplierController.class).delete(supplier.getId())).withRel("delete")
         );
