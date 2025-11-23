@@ -49,7 +49,7 @@ El backend del sistema provee varios microservicios completamente funcionales:
 ## Pasos para ejecutar el Backend (Spring Boot + Oracle Autonomous Database)
 
 #### **1. Clonar el repositorio**
-git clone https://github.com/tu-repo-backend.git
+git clone https://github.com/carl287/Sportwear
 
 #### **2.Abrir el proyecto en IntelliJ IDEA**
 -Selecciona "Open" y carga el proyecto.
@@ -60,13 +60,13 @@ git clone https://github.com/tu-repo-backend.git
 
 
 #### **3. Ejecutar el backend)**
--Desde IntelliJ (botón -> Run)
+-Desde IntelliJ (botón -> Run).
 
 -Esto significa que levantaste el servicio correctamente, en la terminal hay una linea 
 que dice "Using generated security password: ".
 
 
--Guarda la password
+-Guarda la password.
 
 #### **4. Acceder a Swagger**
 link: http://localhost:8080/swagger-ui/index.html
