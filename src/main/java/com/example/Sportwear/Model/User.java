@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "APP_USER")
 public class User {
 
     @Id
@@ -21,3 +22,4 @@ public class User {
 
     private boolean active = true;
 }
+
