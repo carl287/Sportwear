@@ -15,7 +15,7 @@ SportWear: Tienda Deportiva -- ¿Cómo logramos su desarrollo?
 
 ## Funcionalidades principales en el:
 
-### 🖥 Backend – Spring Boot
+### Backend – Spring Boot
 El backend del sistema provee varios microservicios completamente funcionales:
 
 #### **1. Gestión de Productos**
@@ -79,5 +79,4 @@ Debido a que Spring Boot te está mostrando esa contraseña porque Spring Securi
 
 
 
-#### **6. Exploración mediante Swagger**
-Disponible en:
+
