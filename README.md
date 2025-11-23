@@ -1,4 +1,4 @@
-Este proyecto fue desarrollado para la asignatura Aplicaciones Móviles, correspondiente al cuarto semestre de la carrera Ingeniería en Informática.
+Este proyecto fue desarrollado para la asignatura Aplicaciones Móviles, correspondiente al cuarto semestre de la carrera de Ingeniería en Informática.
 El trabajo fue realizado por Paula Leiva y Carlos Calvio.
 
 SportWear: Tienda Deportiva -- ¿Cómo logramos su desarrollo?
@@ -60,19 +60,21 @@ git clone https://github.com/carl287/Sportwear
 
 
 #### **3. Ejecutar el backend)**
--Desde IntelliJ (botón -> Run).
 
--Esto significa que levantaste el servicio correctamente, en la terminal hay una linea 
-que dice "Using generated security password: ".
+-Iniciar el proyecto desde IntelliJ IDEA utilizando Run en la clase principal SportwearApplication.
 
+Si el servicio se inicia correctamente, la consola mostrará un mensaje similar a:
 
--Guarda la password.
+Using generated security password: <valor_generado>
+
+Esta contraseña corresponde al usuario predeterminado user creado por Spring Security para entornos de desarrollo.
+Es importante copiar y guardar este valor, ya que será necesario para acceder a la interfaz de Swagger UI o realizar solicitudes protegidas mientras no se configure un mecanismo de autenticación propio.
 
 #### **4. Acceder a Swagger**
 link: http://localhost:8080/swagger-ui/index.html
 
--si te pide iniciar sesion el usuario es user y la  contraseña es la contarseña temporal que aparece en la terminal en la linea 
-que dice "Using generated security password: ".
+-si te pide iniciar sesion el usuario es user y la  contraseña es la contraseña temporal que aparece en la terminal en la linea 
+que dice "Using generated security password: <valor_generado>".
 
 ¿Por qué?
 Debido a que Spring Boot te está mostrando esa contraseña porque Spring Security está activado por defecto.
