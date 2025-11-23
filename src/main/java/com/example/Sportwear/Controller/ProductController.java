@@ -42,4 +42,10 @@ public class ProductController {
         productService.delete(id);
         return "Producto eliminado.";
     }
+
+    @GetMapping("/talla/{talla}")
+    public List<Product> getByTalla(@PathVariable String talla) {
+        return productService.filtrarPorTalla(talla);
+    }
+
 }

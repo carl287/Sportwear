@@ -24,6 +24,11 @@ public class ProductService {
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado con ID: " + id));
     }
 
+    // 🔥 FILTRO POR TALLA (correcto)
+    public List<Product> filtrarPorTalla(String talla) {
+        return productRepository.findBySize(talla);
+    }
+
     public Product create(Product product) {
         return productRepository.save(product);
     }
