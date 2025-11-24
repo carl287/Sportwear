@@ -59,7 +59,7 @@ git clone https://github.com/carl287/Sportwear
 -Cambia las versiones si es necesario en pom.xml.
 
 
-#### **3. Ejecutar el backend)**
+#### **3. Ejecutar el backend**
 
 -Iniciar el proyecto desde IntelliJ IDEA utilizando Run en la clase principal SportwearApplication.
 
@@ -80,5 +80,71 @@ que dice "Using generated security password: <valor_generado>".
 Debido a que Spring Boot te está mostrando esa contraseña porque Spring Security está activado por defecto.
 
 
+#### **5. Pruebas básicas del backend (API REST)**
 
+Una vez que el backend esté ejecutándose correctamente, es importante verificar que los endpoints funcionen antes de conectar la app móvil.
+Para esto puedes utilizar Swagger, que permite probar cada operación HTTP de manera visual.
+
+A continuación, se describen pruebas esenciales:
+
+#### A) Crear un producto (POST)
+
+En Swagger, abre el endpoint:
+POST /api/products
+
+Haz clic en Try it out.
+
+Ingresa un JSON válido con los atributos del producto, por ejemplo:
+{
+  "name": "Zapatillas Adizero Boston 13 Mujer",
+  "description": "Zapatillas de alto rendimiento para running",
+  "price": 139990,
+  "category": "Zapatillas",
+  "size": "M",
+  "color": "Rojo",
+  "imageUrl": "https://www.adidas.cl/camiseta-local-seleccion-chilena-26/KG8542.html",
+  "stock": 20
+}
+Ejecuta la petición y verifica que el servidor responde con 201 (Created)
+
+#### B) Obtener productos (GET)
+
+-Abre el endpoint:
+GET /api/products
+
+-En id pon el id que se creó automaticamente en POST, este id se meustra abajo de 201 .
+
+-Verifica que aparezca el producto creado en el paso anterior.
+
+#### C) Actualizar un producto (PUT)
+
+Abre:
+PUT /api/products/{id}
+
+Envía un JSON con la información actualizada (por ejemplo, cambiar la imageUrl).
+
+Ejecuta y revisa nuevamente el GET para confirmar que los cambios se aplicaron.
+
+
+ #### **6. Confirmar el despliegue en AWS**
+
+ La instancia es : http://44.221.81.240:8080/api/products
+
+Todos los endpoints probados anteriormente funcionan sobre la instancia EC2 desplegada en AWS, lo que garantiza que:
+
+El backend responde correctamente fuera de local.
+
+Las rutas son accesibles por la app móvil.
+
+La base de datos está recibiendo y entregando información real.
+
+Todos los metodos que actualices en el swagger se mostrarán automaticamente en la instancia.
+
+
+
+#### **7. Conexión de la aplicación móvil con el backend (Retrofit + ViewModel + Repository)**
+
+Una vez que el backend está funcionando correctamente en AWS, el siguiente paso es integrar la aplicación móvil para obtener el catálogo de productos desde:http://44.221.81.240:8080/api/products
+
+agregando los archivos previamente ya agregados : RetrofitClient.kt, ProductApi.kt, archivos Local y Remote con los links correspondientes dentro de los codigos.
 
