@@ -17,5 +17,4 @@ public abstract class GestionProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int stock;
 }

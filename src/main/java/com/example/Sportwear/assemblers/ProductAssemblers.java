@@ -15,8 +15,20 @@ public class ProductAssemblers implements RepresentationModelAssembler<Product, 
     @Override
     public EntityModel<Product> toModel(Product product) {
 
-       return EntityModel.of(product,
-               linkTo(methodOn(ProductController.class).findById(product.getId())).withSelfRel(),
-               linkTo(methodOn(ProductController.class).findAll()).withRel("productos"));
+        int placeholderAmount = 0;
+        String placeholderTalla = "{talla}";
+
+        return EntityModel.of(product,
+                linkTo(methodOn(ProductController.class).findById(product.getId())).withSelfRel(),
+                linkTo(methodOn(ProductController.class).findAll()).withRel("productos"),
+                linkTo(methodOn(ProductController.class)
+                        .decreaseStock(product.getId(), placeholderTalla, placeholderAmount))
+                        .withRel("disminuir-stock-por-talla")
+                        .withTitle("Añadir /disminuir-stock-por-talla?talla={talla}&amount={cantidad}"),
+                linkTo(methodOn(ProductController.class)
+                        .increaseStock(product.getId(), placeholderTalla, placeholderAmount))
+                        .withRel("aumentar-stock-por-talla")
+                        .withTitle("Añadir /aumentar-stock-por-talla?talla={talla}&amount={cantidad}")
+        );
     }
 }

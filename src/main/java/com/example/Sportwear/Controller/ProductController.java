@@ -5,6 +5,7 @@ import com.example.Sportwear.Service.ProductService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/products")
@@ -16,7 +17,6 @@ public class ProductController {
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
-
     @GetMapping
     public List<Product> findAll() {
         return productService.getAllProducts();
@@ -48,4 +48,39 @@ public class ProductController {
         return productService.filtrarPorTalla(talla);
     }
 
+    @PutMapping("/stock/{id}")
+    public Product updateStockByTalla(@PathVariable int id, @RequestBody Map<String, Integer> newStockMap) {
+        // Llama al nuevo método en el servicio
+        return productService.updateStockByTalla(id, newStockMap);
+    }
+
+    @PutMapping("/stock/increase/{id}")
+    public Product increaseStock(
+            @PathVariable int id,
+            @RequestParam String talla,
+            @RequestParam int amount) {
+
+        // Llama al nuevo método en el servicio, pasando la talla
+        return productService.increaseStock(id, talla, amount);
+    }
+
+    @PutMapping("/stock/decrease/{id}")
+    public Product decreaseStock(
+            @PathVariable int id,
+            @RequestParam String talla,
+            @RequestParam int amount) {
+
+        // Llama al nuevo método en el servicio, pasando la talla
+        return productService.decreaseStock(id, talla, amount);
+    }
+
+    /**
+     * Endpoint para obtener productos con al menos una talla con stock bajo.
+     * GET /api/products/low-stock?threshold=5
+     */
+    @GetMapping("/low-stock")
+    public List<Product> lowStock(@RequestParam(defaultValue = "5") int threshold) {
+        // El servicio maneja la lógica de buscar stock bajo en el mapa
+        return productService.getLowStock(threshold);
+    }
 }
