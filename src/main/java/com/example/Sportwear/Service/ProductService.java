@@ -39,10 +39,20 @@ public class ProductService {
     public Product update(int id, Product updated) {
         Product existing = getById(id);
 
+        // --- INICIO: Actualización completa de todos los campos ---
         existing.setName(updated.getName());
         existing.setDescription(updated.getDescription());
         existing.setPrice(updated.getPrice());
+
+        // 🔥 CAMPOS AGREGADOS: Es crucial copiar todos los campos de la entidad
+        existing.setCategory(updated.getCategory());
+        existing.setSize(updated.getSize());
+        existing.setColor(updated.getColor());
+        existing.setImageUrl(updated.getImageUrl());
+        existing.setStockPorTalla(updated.getStockPorTalla()); // Si aún usa el campo 'stock' simple
+
         existing.setStockPorTalla(updated.getStockPorTalla());
+        // --- FIN: Actualización completa de todos los campos ---
 
         return productRepository.save(existing);
     }
