@@ -10,7 +10,7 @@ import java.util.Map;
 @Service
 public class CurrencyService {
 
-    private final String API_URL = "https://api.frankfurter.app/latest?amount={amount}&from=CLP&to={to}";
+    private final String API_URL = "https://open.er-api.com/v6/latest/CLP";
 
     public double convertCLP(int amount, String toCurrency) {
 
