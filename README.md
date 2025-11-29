@@ -58,6 +58,12 @@ git clone https://github.com/carl287/Sportwear
 
 -Cambia las versiones si es necesario en pom.xml.
 
+-Sincronizar con gradle :
+✔settings.gradle
+✔ build.gradle (Proyecto)
+✔ build.gradle (App / módulo)
+✔ libs.versions.toml
+
 
 #### **3. Ejecutar el backend**
 
@@ -70,8 +76,8 @@ Using generated security password: <valor_generado>
 Esta contraseña corresponde al usuario predeterminado user creado por Spring Security para entornos de desarrollo.
 Es importante copiar y guardar este valor, ya que será necesario para acceder a la interfaz de Swagger UI o realizar solicitudes protegidas mientras no se configure un mecanismo de autenticación propio.
 
-#### **4. Acceder a Swagger**
-link: http://localhost:8080/swagger-ui/index.html
+#### **4. Acceder a Swagger ya subido a una instancia AWS**
+link: http://44.222.120.69:8080/swagger-ui/index.html#/
 
 -si te pide iniciar sesion el usuario es user y la  contraseña es la contraseña temporal que aparece en la terminal en la linea 
 que dice "Using generated security password: <valor_generado>".
@@ -128,23 +134,30 @@ Ejecuta y revisa nuevamente el GET para confirmar que los cambios se aplicaron.
 
  #### **6. Confirmar el despliegue en AWS**
 
- La instancia es : http://44.221.81.240:8080/api/products
+Instancia 1 – Link:
+http://44.221.81.240:8080/api/products
+¿Qué función cumple esta instancia?
+Esta instancia corresponde al servidor principal utilizado para ejecutar y probar la API en producción.
+Permite realizar pruebas completas de los endpoints (GET, POST, PUT, DELETE) desde Swagger, Postman u otra herramienta, verificando que el backend Spring Boot esté funcionando correctamente.
 
-Todos los endpoints probados anteriormente funcionan sobre la instancia EC2 desplegada en AWS, lo que garantiza que:
+Instancia 2 – Link:
+http://44.222.120.69:8080/api/products
+¿Qué función cumple esta instancia?
+Esta instancia se utiliza como servidor espejo para visualizar el catálogo desde la aplicación móvil.
+La app consume este endpoint para mostrar los productos en tiempo real. También permite comprobar que la API está operativa, accesible públicamente y retornando los datos necesarios para el frontend.
 
-El backend responde correctamente fuera de local.
+ **¿Qué diferencia hay entre ambas?**
 
-Las rutas son accesibles por la app móvil.
+Instancia 1: ambiente de pruebas directas de API (testing de endpoints).
 
-La base de datos está recibiendo y entregando información real.
-
-Todos los metodos que actualices en el swagger se mostrarán automaticamente en la instancia.
+Instancia 2: ambiente consumido por la app móvil para visualizar el catálogo (producción ligera).
 
 
 
-#### **7. Conexión de la aplicación móvil con el backend (Retrofit + ViewModel + Repository)**
 
-Una vez que el backend está funcionando correctamente en AWS, el siguiente paso es integrar la aplicación móvil para obtener el catálogo de productos desde:http://44.221.81.240:8080/api/products
+
+
+
 
 agregando los archivos previamente ya agregados : RetrofitClient.kt, ProductApi.kt, archivos Local y Remote con los links correspondientes dentro de los codigos.
 
