@@ -8,28 +8,34 @@ import java.util.Map;
 @Service
 public class CurrencyService {
 
-    private final String API_URL = "https://open.er-api.com/v6/latest/CLP";
+    private final String API_URL =
+            "https://api.fxratesapi.com/latest?base=CLP&symbols=USD,EUR";
 
     public double convertCLP(int amount, String toCurrency) {
 
         RestTemplate restTemplate = new RestTemplate();
 
-        // Llamada simple a la API
+        // Llamar a la API externa
         Map response = restTemplate.getForObject(API_URL, Map.class);
 
-        // Obtenemos el mapa de tasas
+        if (response == null || !response.containsKey("rates")) {
+            throw new IllegalStateException("No se pudo obtener las tasas desde la API externa.");
+        }
+
+        // Obtener el objeto "rates"
         Map<String, Object> rates = (Map<String, Object>) response.get("rates");
 
-        // Extraemos la tasa según la moneda
-        Object rawRate = rates.get(toCurrency.toUpperCase());
-        if (rawRate == null) {
+        // Normalizamos la moneda solicitada
+        String currencyKey = toCurrency.toUpperCase();
+
+        if (!rates.containsKey(currencyKey)) {
             throw new IllegalArgumentException("Moneda no soportada: " + toCurrency);
         }
 
-        // Convertimos a double
-        double rate = Double.parseDouble(rawRate.toString());
+        // Convertimos la tasa a double
+        double rate = Double.parseDouble(rates.get(currencyKey).toString());
 
-        // Multiplicamos el precio CLP por la tasa
+        // Retornamos la conversión
         return amount * rate;
     }
 }
