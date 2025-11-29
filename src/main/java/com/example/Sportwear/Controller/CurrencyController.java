@@ -16,7 +16,7 @@ public class CurrencyController {
         this.currencyService = currencyService;
     }
 
-    // http://localhost:8080/api/currency/convert?amount=10000&to=USD
+
     @GetMapping("/convert")
     public double convert(
             @RequestParam int amount,

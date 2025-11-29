@@ -1,7 +1,5 @@
 package com.example.Sportwear.Service;
 
-
-
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,16 +14,22 @@ public class CurrencyService {
 
         RestTemplate restTemplate = new RestTemplate();
 
-        Map response = restTemplate.getForObject(
-                API_URL,
-                Map.class,
-                amount,
-                toCurrency
-        );
+        // Llamada simple a la API
+        Map response = restTemplate.getForObject(API_URL, Map.class);
 
-        Map<String, Double> rates = (Map<String, Double>) response.get("rates");
+        // Obtenemos el mapa de tasas
+        Map<String, Object> rates = (Map<String, Object>) response.get("rates");
 
-        return rates.get(toCurrency);
+        // Extraemos la tasa según la moneda
+        Object rawRate = rates.get(toCurrency.toUpperCase());
+        if (rawRate == null) {
+            throw new IllegalArgumentException("Moneda no soportada: " + toCurrency);
+        }
+
+        // Convertimos a double
+        double rate = Double.parseDouble(rawRate.toString());
+
+        // Multiplicamos el precio CLP por la tasa
+        return amount * rate;
     }
 }
-
