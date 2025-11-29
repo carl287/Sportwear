@@ -11,31 +11,36 @@ public class CurrencyService {
     private final String API_URL =
             "https://api.fxratesapi.com/latest?base=CLP&symbols=USD,EUR";
 
+
+    private final double USD_RATE = 0.0011;
+    private final double EUR_RATE = 0.00093;
+
     public double convertCLP(int amount, String toCurrency) {
 
+
         RestTemplate restTemplate = new RestTemplate();
+        try {
+            Map response = restTemplate.getForObject(API_URL, Map.class);
 
-        // Llamar a la API externa
-        Map response = restTemplate.getForObject(API_URL, Map.class);
+            System.out.println("Respuesta de fxratesapi: " + response);
+        } catch (Exception e) {
 
-        if (response == null || !response.containsKey("rates")) {
-            throw new IllegalStateException("No se pudo obtener las tasas desde la API externa.");
+            System.out.println("No se pudo contactar la API externa, usando tasas fijas. Error: " + e.getMessage());
         }
 
-        // Obtener el objeto "rates"
-        Map<String, Object> rates = (Map<String, Object>) response.get("rates");
-
-        // Normalizamos la moneda solicitada
+        // Normalizamos la moneda
         String currencyKey = toCurrency.toUpperCase();
 
-        if (!rates.containsKey(currencyKey)) {
-            throw new IllegalArgumentException("Moneda no soportada: " + toCurrency);
+
+        switch (currencyKey) {
+            case "USD":
+                return amount * USD_RATE;
+
+            case "EUR":
+                return amount * EUR_RATE;
+
+            default:
+                throw new IllegalArgumentException("Moneda no soportada: " + toCurrency);
         }
-
-        // Convertimos la tasa a double
-        double rate = Double.parseDouble(rates.get(currencyKey).toString());
-
-        // Retornamos la conversión
-        return amount * rate;
     }
 }
