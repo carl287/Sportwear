@@ -30,7 +30,7 @@ public class Product extends GestionProduct {
     private String description;
 
     @Column(name = "PRODUCT_PRICE")
-    private int price;
+    private double price;
 
     @Column(name = "PRODUCT_CATEGORY")
     private String category;
