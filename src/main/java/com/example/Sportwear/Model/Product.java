@@ -24,7 +24,7 @@ public class Product extends GestionProduct {
     private String description;
 
     @Column(name = "PRODUCT_PRICE")
-    private double price;
+    private Double price;
 
     @Column(name = "PRODUCT_CATEGORY")
     private String category;
@@ -46,4 +46,19 @@ public class Product extends GestionProduct {
     @MapKeyColumn(name = "SIZE_KEY")
     @Column(name = "STOCK_QUANTITY")
     private Map<String, Integer> stockPorTalla = new HashMap<>();
+
+    // --- MÉTODO DECREMENTAR STOCK ---
+    public void decreaseStock(String sizeKey, int quantity) {
+        if (!stockPorTalla.containsKey(sizeKey)) {
+            throw new IllegalArgumentException("Talla no válida: " + sizeKey);
+        }
+
+        int currentStock = stockPorTalla.get(sizeKey);
+
+        if (currentStock < quantity) {
+            throw new IllegalStateException("Stock insuficiente para la talla: " + sizeKey);
+        }
+
+        stockPorTalla.put(sizeKey, currentStock - quantity);
+    }
 }
