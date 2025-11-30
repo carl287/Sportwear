@@ -24,7 +24,7 @@ public class Product extends GestionProduct {
     private String description;
 
     @Column(name = "PRODUCT_PRICE")
-    private int price;
+    private double price;
 
     @Column(name = "PRODUCT_CATEGORY")
     private String category;
@@ -40,7 +40,7 @@ public class Product extends GestionProduct {
 
     @ElementCollection
     @CollectionTable(
-            name = "PRODUCT_STOCK_BY_SIZE", 
+            name = "PRODUCT_STOCK_BY_SIZE",
             joinColumns = @JoinColumn(name = "PRODUCT_ID")
     )
     @MapKeyColumn(name = "SIZE_KEY")
