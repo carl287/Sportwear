@@ -17,19 +17,20 @@ public class UserService {
     }
 
     // Registrar usuario
-    public String agregarUser(User user) {
+    public User registrar(User user) {
 
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-            return "El email ya está registrado";
+            throw new RuntimeException("El email ya está registrado");
         }
 
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
-            return "El nombre de usuario ya está en uso";
+            throw new RuntimeException("El nombre de usuario ya está en uso");
         }
 
-        userRepository.save(user);
-        return "Usuario agregado con id " + user.getId();
+        return userRepository.save(user);
     }
+
+
 
     // Listar todos
     public List<User> listarUsuarios() {

@@ -84,4 +84,28 @@ public class UserController {
             return ResponseEntity.internalServerError().body("Error interno en el inicio de sesión.");
         }
     }
+
+    @Operation(summary = "Registrar usuario", description = "Crea un nuevo usuario en la base de datos")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Usuario registrado correctamente"),
+            @ApiResponse(responseCode = "400", description = "Datos inválidos o usuario duplicado"),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody User user) {
+        try {
+            User nuevo = userService.registrar(user);
+            return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
+
+        } catch (RuntimeException ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Error al registrar usuario");
+        }
+    }
+
+
+
+
 }
