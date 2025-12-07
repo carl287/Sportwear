@@ -16,9 +16,12 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    // Registrar usuario
+    // ---------------------------------------------------------
+    //   REGISTRAR USUARIO (Corregido con región/comuna/dirección)
+    // ---------------------------------------------------------
     public User registrar(User user) {
 
+        // Validación de duplicados
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             throw new RuntimeException("El email ya está registrado");
         }
@@ -27,23 +30,49 @@ public class UserService {
             throw new RuntimeException("El nombre de usuario ya está en uso");
         }
 
-        return userRepository.save(user);
+        // Validación de campos obligatorios para Oracle
+        if (user.getRegion() == null || user.getRegion().isBlank()) {
+            throw new RuntimeException("La región es obligatoria");
+        }
+        if (user.getComuna() == null || user.getComuna().isBlank()) {
+            throw new RuntimeException("La comuna es obligatoria");
+        }
+        if (user.getDireccion() == null || user.getDireccion().isBlank()) {
+            throw new RuntimeException("La dirección es obligatoria");
+        }
+
+        // Construcción del usuario final asegurando que no haya nulls
+        User nuevo = new User();
+        nuevo.setUsername(user.getUsername());
+        nuevo.setPassword(user.getPassword());
+        nuevo.setEmail(user.getEmail());
+        nuevo.setRegion(user.getRegion());
+        nuevo.setComuna(user.getComuna());
+        nuevo.setDireccion(user.getDireccion());
+        nuevo.setEsAdmin(false);
+        nuevo.setActive(true);
+
+        return userRepository.save(nuevo);
     }
 
-
-
-    // Listar todos
+    // ---------------------------------------------------------
+    //   LISTAR TODOS LOS USUARIOS
+    // ---------------------------------------------------------
     public List<User> listarUsuarios() {
         return userRepository.findAll();
     }
 
-    // Buscar por ID
+    // ---------------------------------------------------------
+    //   OBTENER POR ID
+    // ---------------------------------------------------------
     public User obtenerUsuarioPorId(int id) {
         return userRepository.findById(id)
                 .orElse(null);
     }
 
-    // Eliminar
+    // ---------------------------------------------------------
+    //   ELIMINAR USUARIO
+    // ---------------------------------------------------------
     public String eliminarUsuario(int id) {
         if (!userRepository.existsById(id)) {
             return "Usuario no encontrado";
@@ -53,7 +82,9 @@ public class UserService {
         return "Usuario eliminado con id " + id;
     }
 
-    // Actualizar usuario
+    // ---------------------------------------------------------
+    //   ACTUALIZAR USUARIO
+    // ---------------------------------------------------------
     public String actualizarUsuario(int id, User user) {
         if (!userRepository.existsById(id)) {
             return "Usuario no encontrado";
@@ -64,6 +95,9 @@ public class UserService {
         buscado.setUsername(user.getUsername());
         buscado.setPassword(user.getPassword());
         buscado.setEmail(user.getEmail());
+        buscado.setRegion(user.getRegion());
+        buscado.setComuna(user.getComuna());
+        buscado.setDireccion(user.getDireccion());
         buscado.setEsAdmin(user.isEsAdmin());
         buscado.setActive(user.isActive());
 
@@ -72,9 +106,10 @@ public class UserService {
         return "Usuario actualizado con id " + id;
     }
 
-    // Login básico
+    // ---------------------------------------------------------
+    //   LOGIN
+    // ---------------------------------------------------------
     public Optional<User> login(String username, String password) {
         return userRepository.findByUsernameAndPassword(username, password);
     }
 }
-
