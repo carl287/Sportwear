@@ -15,11 +15,18 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String username;
     private String password;
     private String email;
-    private boolean esAdmin;
 
+    private String region;
+    private String comuna;
+    private String direccion;
+
+    private boolean esAdmin;
     private boolean active = true;
 }
+
+
 
