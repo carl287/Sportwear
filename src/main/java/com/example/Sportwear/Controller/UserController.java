@@ -18,6 +18,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
+
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +39,14 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "Usuarios listados correctamente"),
             @ApiResponse(responseCode = "500", description = "Error interno al listar usuarios")
     })
+
+    @GetMapping("/username/{username}")
+    public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
+        Optional<User> user = userService.findByUsername(username);
+        return user.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
     @GetMapping
     public ResponseEntity<CollectionModel<EntityModel<User>>> getUsers() {
         List<User> lista = userService.listarUsuarios();
