@@ -17,6 +17,7 @@ public class GestionEnvioController {
         this.service = service;
     }
 
+    // 📦 Crear envío (cliente)
     @PostMapping
     public GestionEnvio create(@RequestBody GestionEnvio gestionEnvio) {
         return service.create(gestionEnvio);
@@ -33,14 +34,15 @@ public class GestionEnvioController {
     }
 
     @PutMapping("/{id}")
-    public GestionEnvio update(@PathVariable int id, @RequestBody GestionEnvio updated) {
+    public GestionEnvio update(
+            @PathVariable int id,
+            @RequestBody GestionEnvio updated
+    ) {
         return service.update(id, updated);
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable int id) {
+    public void delete(@PathVariable int id) {
         service.delete(id);
-        return "Gestión de envío eliminada correctamente.";
     }
 }
-

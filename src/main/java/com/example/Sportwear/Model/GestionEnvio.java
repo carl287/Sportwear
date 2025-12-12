@@ -1,6 +1,5 @@
 package com.example.Sportwear.Model;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,15 +11,15 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Entity
 public class GestionEnvio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private int id;
-    private String gestionName;
-    private String gestionEmail;
-    private String gestionPatente;
+
+    // 🚚 Datos del envío (CLIENTE)
+    private String agenciaEnvio;   // Correos de Chile / Starken
+    private String fechaEnvio;     // dd/MM/yyyy
+    private String estadoEnvio;    // En espera / En proceso / En camino
 }

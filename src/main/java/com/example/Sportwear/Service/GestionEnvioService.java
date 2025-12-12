@@ -16,6 +16,10 @@ public class GestionEnvioService {
     }
 
     public GestionEnvio create(GestionEnvio gestionEnvio) {
+        // Estado inicial automático (buena práctica)
+        if (gestionEnvio.getEstadoEnvio() == null) {
+            gestionEnvio.setEstadoEnvio("En espera de despacho");
+        }
         return repo.save(gestionEnvio);
     }
 
@@ -31,17 +35,14 @@ public class GestionEnvioService {
     public GestionEnvio update(int id, GestionEnvio updated) {
         GestionEnvio existing = getById(id);
 
-        existing.setGestionName(updated.getGestionName());
-        existing.setGestionEmail(updated.getGestionEmail());
-        existing.setGestionPatente(updated.getGestionPatente());
+        existing.setAgenciaEnvio(updated.getAgenciaEnvio());
+        existing.setFechaEnvio(updated.getFechaEnvio());
+        existing.setEstadoEnvio(updated.getEstadoEnvio());
 
         return repo.save(existing);
     }
 
     public void delete(int id) {
-        if (!repo.existsById(id)) {
-            throw new RuntimeException("Gestión de envío no encontrada");
-        }
         repo.deleteById(id);
     }
 }
