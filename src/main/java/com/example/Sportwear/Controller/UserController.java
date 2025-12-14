@@ -40,6 +40,11 @@ public class UserController {
             @ApiResponse(responseCode = "500", description = "Error interno al listar usuarios")
     })
 
+    @GetMapping("/testroute")
+    public String testRoute() {
+        return "Test OK";
+    }
+
     @GetMapping("/username/{username}")
     public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
         Optional<User> user = userService.findByUsername(username);
