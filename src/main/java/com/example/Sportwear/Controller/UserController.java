@@ -26,6 +26,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/users")
 @Tag(name = "Vista de usuarios")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT})
 public class UserController {
 
     @Autowired
