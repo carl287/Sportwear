@@ -100,6 +100,20 @@ public class UserController {
         }
     }
 
+    @Operation(summary = "Eliminar usuario", description = "Elimina de forma permanente la cuenta de un usuario.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Usuario eliminado correctamente"),
+            @ApiResponse(responseCode = "404", description = "Usuario no encontrado")
+    })
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable int id) {
+        String resultado = userService.eliminarUsuario(id);
+        if (resultado.equals("Usuario no encontrado")) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.noContent().build();
+    }
+
     @Operation(summary = "Registrar usuario", description = "Crea un nuevo usuario en la base de datos")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Usuario registrado correctamente"),
