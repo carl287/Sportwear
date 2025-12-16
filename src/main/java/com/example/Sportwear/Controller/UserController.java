@@ -113,7 +113,7 @@ public class UserController {
             if (resultado.contains("no encontrado")) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(resultado);
             }
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.ok().build();
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body("Error al eliminar usuario");
         }
