@@ -27,6 +27,16 @@ public class User {
     @JsonProperty("esAdmin")
     private boolean esAdmin;
 
+    @JsonProperty("esAdmin")
+    public boolean isEsAdmin() {
+        return esAdmin;
+    }
+
+    @JsonProperty("esAdmin")
+    public void setEsAdmin(boolean esAdmin) {
+        this.esAdmin = esAdmin;
+    }
+
     private boolean active = true;
 }
 
