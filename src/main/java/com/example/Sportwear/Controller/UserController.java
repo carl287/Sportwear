@@ -100,18 +100,23 @@ public class UserController {
         }
     }
 
-    @Operation(summary = "Eliminar usuario", description = "Elimina de forma permanente la cuenta de un usuario.")
+    @Operation(summary = "Eliminar usuario", description = "Elimina un usuario de la base de datos por su ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Usuario eliminado correctamente"),
-            @ApiResponse(responseCode = "404", description = "Usuario no encontrado")
+            @ApiResponse(responseCode = "404", description = "Usuario no encontrado"),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable int id) {
-        String resultado = userService.eliminarUsuario(id);
-        if (resultado.equals("Usuario no encontrado")) {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<?> eliminarUsuario(@PathVariable Integer id) {
+        try {
+            String resultado = userService.eliminarUsuario(id);
+            if (resultado.contains("no encontrado")) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(resultado);
+            }
+            return ResponseEntity.noContent().build(); 
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Error al eliminar usuario");
         }
-        return ResponseEntity.noContent().build();
     }
 
     @Operation(summary = "Registrar usuario", description = "Crea un nuevo usuario en la base de datos")
