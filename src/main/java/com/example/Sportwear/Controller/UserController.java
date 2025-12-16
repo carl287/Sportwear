@@ -106,7 +106,7 @@ public class UserController {
             @ApiResponse(responseCode = "404", description = "Usuario no encontrado"),
             @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/id/{id}")
     public ResponseEntity<?> eliminarUsuario(@PathVariable Integer id) {
         try {
             String resultado = userService.eliminarUsuario(id);
