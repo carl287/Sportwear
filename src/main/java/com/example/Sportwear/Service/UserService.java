@@ -49,7 +49,6 @@ public class UserService {
         nuevo.setRegion(user.getRegion());
         nuevo.setComuna(user.getComuna());
         nuevo.setDireccion(user.getDireccion());
-        nuevo.setEsAdmin(false);
         nuevo.setActive(true);
 
         return userRepository.save(nuevo);

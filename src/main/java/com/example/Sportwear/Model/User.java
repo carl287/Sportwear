@@ -23,7 +23,7 @@ public class User {
     private String region;
     private String comuna;
     private String direccion;
-    
+
     @JsonProperty("esAdmin")
     private boolean esAdmin;
 
