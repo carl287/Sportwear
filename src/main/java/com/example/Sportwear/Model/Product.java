@@ -35,8 +35,9 @@ public class Product extends GestionProduct {
     @Column(name = "PRODUCT_COLOR")
     private String color;
 
-    @Column(name = "PRODUCT_IMAGE_URL")
-    private String imageUrl;
+    @Lob // Indica que es un objeto grande
+    @Column(name = "IMAGEN_URL", columnDefinition = "CLOB") 
+    private String imagenUrl;
 
     @ElementCollection
     @CollectionTable(
