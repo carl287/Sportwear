@@ -48,7 +48,7 @@ public class ProductService {
         existing.setCategory(updated.getCategory());
         existing.setSize(updated.getSize());
         existing.setColor(updated.getColor());
-        existing.setImageUrl(updated.getImageUrl());
+        existing.setImagenUrl(updated.getImagenUrl());
         existing.setStockPorTalla(updated.getStockPorTalla()); // Si aún usa el campo 'stock' simple
 
         existing.setStockPorTalla(updated.getStockPorTalla());
