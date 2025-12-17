@@ -36,10 +36,18 @@ public class Product extends GestionProduct {
     @Column(name = "PRODUCT_COLOR")
     private String color;
 
-    @Lob // Indica que es un objeto grande
+    @Lob
     @Column(name = "PRODUCT_IMAGE_URL", columnDefinition = "CLOB")
     @JsonProperty("imagenUrl")
     private String imagenUrl;
+
+    public String getImagenUrl() {
+        return this.imagenUrl;
+    }
+
+    public void setImagenUrl(String imagenUrl) {
+        this.imagenUrl = imagenUrl;
+    }
 
     @ElementCollection
     @CollectionTable(
