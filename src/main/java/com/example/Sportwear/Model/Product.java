@@ -1,5 +1,6 @@
 package com.example.Sportwear.Model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,6 +38,7 @@ public class Product extends GestionProduct {
 
     @Lob // Indica que es un objeto grande
     @Column(name = "PRODUCT_IMAGE_URL", columnDefinition = "CLOB")
+    @JsonProperty("imagenUrl")
     private String imagenUrl;
 
     @ElementCollection

@@ -29,6 +29,13 @@ public class ProductController {
 
     @PostMapping
     public Product create(@RequestBody Product product) {
+        // DEBUG: Esto te dirá exactamente qué está llegando desde Android
+        if (product.getImagenUrl() != null) {
+            System.out.println("IMAGEN RECIBIDA: El String empieza con: " + product.getImagenUrl().substring(0, Math.min(product.getImagenUrl().length(), 30)));
+            System.out.println("LONGITUD TOTAL: " + product.getImagenUrl().length());
+        } else {
+            System.out.println("ERROR: La imagen llegó NULL al controlador. Revisa el nombre del campo en Java y Android.");
+        }
         return productService.create(product);
     }
 
